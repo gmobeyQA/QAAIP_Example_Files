@@ -1,0 +1,5 @@
+all:
+  children:
+    jenkins_server:
+      hosts:
+        jenkins:

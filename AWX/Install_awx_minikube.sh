@@ -29,10 +29,9 @@ echo "exit out of su and back into the user qa"
 sudo usermod -aG docker $USER && newgrp docker
 minikube start --vm-driver=docker --addons=ingress
 
-sudo su <<EOF2
-curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
-EOF2
+sudo curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
 
 git clone https://github.com/ansible/awx-operator.git
 cd awx-operator/

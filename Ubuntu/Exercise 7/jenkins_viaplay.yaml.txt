@@ -1,0 +1,38 @@
+---
+- name: Install and start jenkins
+  hosts: jenkins_server
+  become: true
+  tasks:
+    - name: Install Java
+      ansible.builtin.apt:
+        name: default-jdk
+        state: present
+        update_cache: true
+
+    - name: Install a list of packages required by jenkins
+      ansible.builtin.apt:
+        name:
+        - fontconfig
+        - openjdk-21-jre
+        - gnupg
+        - lsb-release
+        state: present
+        update_cache: true
+    - name: Add jenkins repository key
+      ansible.builtin.apt_key:
+        url: https://pkg.jenkins.io/debian/jenkins.io-2026.key
+        state: present
+    - name: Add jenkins repository
+      ansible.builtin.apt_repository:
+        repo: deb https://pkg.jenkins.io/debian-stable binary/
+        state: present
+    - name: Install jenkins
+      ansible.builtin.apt:
+        name: jenkins
+        state: present
+        update_cache: true
+    - name: Start and enable jenkins
+      ansible.builtin.service:
+        name: jenkins
+        state: started
+        enabled: true

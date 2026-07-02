@@ -1,0 +1,2 @@
+install_directory: /opt/static-website-example
+git_repository: https://gitlab.com/qacdevops/static-website-example

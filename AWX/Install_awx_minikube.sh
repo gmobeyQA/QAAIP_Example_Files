@@ -7,14 +7,14 @@ sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyring
 sudo chmod a+r /etc/apt/keyrings/docker.asc
  
 # Add the repository to Apt sources:
-sudo tee /etc/apt/sources.list.d/docker.sources <<EOF
+sudo tee /etc/apt/sources.list.d/docker.sources <<EOF1
 Types: deb
 URIs: https://download.docker.com/linux/ubuntu
 Suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
 Components: stable
 Architectures: $(dpkg --print-architecture)
 Signed-By: /etc/apt/keyrings/docker.asc
-EOF
+EOF1
 
 sudo apt update
  
@@ -28,10 +28,10 @@ sudo install minikube-linux-amd64 /usr/local/bin/minikube && rm minikube-linux-a
 sudo usermod -aG docker $USER && newgrp docker
 minikube start --vm-driver=docker --addons=ingress
 
-sudo su
+sudo su <<EOF2
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
-
+EOF2
 
 git clone https://github.com/ansible/awx-operator.git
 cd awx-operator/

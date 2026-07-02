@@ -26,6 +26,8 @@ curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-
 sudo install minikube-linux-amd64 /usr/local/bin/minikube && rm minikube-linux-amd64
  
 echo "exit out of su and back into the user qa"
+exit
+
 sudo usermod -aG docker $USER && newgrp docker
 minikube start --vm-driver=docker --addons=ingress
 

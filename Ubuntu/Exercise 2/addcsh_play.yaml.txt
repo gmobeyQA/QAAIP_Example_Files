@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  connection: local
+  become: true
+  tasks:
+  - name: Install C-Shell
+    apt:
+      name: csh
+      state: present
+      update_cache: true
+
